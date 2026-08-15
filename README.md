@@ -1,128 +1,292 @@
-# Heart Disease Dataset — Data Preprocessing & Feature Selection
+# Heart Disease Prediction ML App
 
-## Overview
+An end-to-end machine learning project that analyzes a heart disease dataset, performs data preprocessing and feature selection, compares multiple classification models, and deploys the selected model through an interactive Streamlit web application.
 
-This project focuses on cleaning, preprocessing, exploring, and selecting features from a heart disease dataset.
+## Project Overview
 
-The objective is to transform the raw dataset into a cleaner and more suitable format for further machine learning analysis.
+The goal of this project is to build a complete machine learning workflow for predicting the presence of heart disease from patient-related clinical attributes.
 
-The project covers data inspection, categorical encoding, handling invalid values, standardization, correlation analysis, variance analysis, and ANOVA-based feature selection.
+The project covers the process from raw data preprocessing to model evaluation and finally to an interactive prediction interface.
+
+### Workflow
+
+**Raw Dataset → Data Cleaning → Encoding → Feature Analysis → Feature Selection → Scaling → Model Training → Model Evaluation → Model Selection → Streamlit Application**
 
 ## Objectives
 
-- Inspect and understand the raw dataset
-- Identify missing, null, duplicate, and invalid values
-- Convert categorical variables into numerical representations
-- Handle invalid zero values in relevant numerical features
-- Standardize numerical features
-- Analyze feature relationships using correlation
-- Examine feature variance
-- Perform ANOVA-based feature selection
-- Generate a cleaned dataset for further machine learning tasks
+* Understand and inspect the heart disease dataset
+* Clean and preprocess the raw data
+* Handle invalid values and duplicate records
+* Convert categorical variables into numerical representations
+* Analyze feature relationships and distributions
+* Perform feature selection using statistical techniques
+* Compare scaled and unscaled machine learning models
+* Evaluate multiple classification algorithms
+* Select the most suitable model based on evaluation results
+* Build an interactive interface for making predictions
 
 ## Dataset
 
-The dataset contains patient-related attributes and a target variable indicating the presence of heart disease.
+The project uses a heart disease dataset containing clinical and demographic attributes.
 
-The main target variable is:
+### Main Features
 
-- `HeartDisease` — target indicating whether heart disease is present
+* `Age` — Age of the patient
+* `Sex` — Sex of the patient
+* `ChestPainType` — Type of chest pain
+* `RestingBP` — Resting blood pressure
+* `Cholesterol` — Cholesterol level
+* `FastingBS` — Fasting blood sugar
+* `RestingECG` — Resting electrocardiogram result
+* `MaxHR` — Maximum heart rate achieved
+* `ExerciseAngina` — Exercise-induced angina
+* `Oldpeak` — ST depression
+* `ST_Slope` — Slope of the peak exercise ST segment
 
-The dataset includes features related to:
+### Target
 
-- Age
-- Sex
-- Chest pain type
-- Resting blood pressure
-- Cholesterol
-- Fasting blood sugar
-- Resting ECG
-- Maximum heart rate
-- Exercise-induced angina
-- ST depression
-- ST slope
+* `HeartDisease` — Indicates whether heart disease is present
 
-## Preprocessing Performed
+`HeartDisease = 0` represents no heart disease and `HeartDisease = 1` represents the presence of heart disease.
 
-### 1. Initial Data Inspection
+## Data Preprocessing
+
+The raw dataset was inspected and prepared for machine learning through several preprocessing steps.
+
+### Data Inspection
 
 The dataset was examined using:
 
-- `head()`
-- `info()`
-- `isnull()`
-- `isna()`
-- `describe()`
-- `shape`
-- duplicate checking
+* Dataset shape
+* Data types
+* Summary statistics
+* Missing/null value checks
+* Duplicate checks
+* Feature distributions
 
-### 2. Categorical Encoding
+### Categorical Encoding
 
-Categorical variables were converted into numerical representations.
+Categorical features were converted into numerical representations.
 
-- `Sex` was converted into a binary variable
-- `ExerciseAngina` was converted into a binary variable
-- `ChestPainType` was converted using one-hot encoding
-- `RestingECG` was converted using one-hot encoding
-- `ST_Slope` was converted using one-hot encoding
+* Binary categorical variables were encoded numerically.
+* Multi-class categorical variables were converted using one-hot encoding.
 
-### 3. Handling Invalid Values
+### Invalid Value Handling
 
-Zero values were investigated in:
+Invalid zero values were investigated in numerical features where zero is not a meaningful physiological measurement, including:
 
-- `Cholesterol`
-- `RestingBP`
+* `RestingBP`
+* `Cholesterol`
 
-Since a person cannot have zero "RestingBP" nor "Cholestrerol", added mean values instead of zero
+These values were handled using appropriate replacement techniques based on the available non-zero observations.
 
-### 4. Data Visualization
+### Feature Analysis
 
-The project uses visualizations to examine:
+The project includes exploratory and statistical analysis using:
 
-- Feature distributions
-- Correlations between numerical features
-- Cholesterol and resting blood pressure distributions
-- Relationships between selected numerical features
+* Correlation analysis
+* Distribution plots
+* Variance analysis
+* ANOVA F-test
+* `SelectKBest` feature selection
 
-Libraries used for visualization include Matplotlib and Seaborn.
+These techniques were used to understand the relationship between the input features and the target variable and to identify potentially useful features.
 
-### 5. Standardization
+## Machine Learning Models
 
-Numerical features were standardized using `StandardScaler` from Scikit-learn.
+Multiple classification algorithms were trained and evaluated.
 
-### 6. Feature Analysis
+The project compares both **scaled and unscaled** feature versions.
 
-Several techniques were used to investigate the usefulness of the features:
+Models evaluated include:
 
-- Pearson correlation analysis
-- Variance analysis
-- ANOVA F-test
+* Logistic Regression
+* K-Nearest Neighbors (KNN)
+* Decision Tree
+* Random Forest
+* Support Vector Machine (SVM)
 
-`SelectKBest` with `f_classif` was used to calculate F-scores and p-values for the features.
+Model performance was compared using multiple evaluation metrics rather than relying only on accuracy.
 
-### 7. Final Dataset
+### Evaluation Metrics
 
-After preprocessing and feature analysis, the cleaned dataset was exported as:
+The models were evaluated using:
 
-`heart_cleaned.csv`
+* Accuracy
+* Precision
+* Recall
+* F1-score
+* Confusion Matrix
+
+The classification notebook contains the detailed evaluation results and explains the reasoning behind the final model selection.
+
+## Model Selection
+
+After comparing the different models and preprocessing configurations, **Scaled Logistic Regression** was selected as the final model for deployment based on its overall evaluation performance in the experiments.
+
+The final trained model is saved and used by the Streamlit application for prediction.
+
+## Streamlit Application
+
+The project includes an interactive Streamlit interface that allows users to enter patient information and receive a model prediction.
+
+### Application Workflow
+
+1. User enters patient-related information.
+2. Input values are converted into the required feature format.
+3. The same preprocessing/scaling configuration used during model training is applied.
+4. The saved Logistic Regression model processes the input.
+5. The application displays the prediction result.
+
+The interface also provides sensible pre-filled example values so that users can test the application even when they do not know every input value.
+
+> **Important:** This application is intended for educational and demonstration purposes only. It is not a medical diagnostic tool and should not be used to make real medical decisions.
 
 ## Technologies Used
 
-- Python
-- Pandas
-- NumPy
-- Matplotlib
-- Seaborn
-- Scikit-learn
-- Google Collab/Jupyter Notebook
+* **Python**
+* **Pandas** — Data manipulation and preprocessing
+* **NumPy** — Numerical computation
+* **Matplotlib** — Data visualization
+* **Seaborn** — Statistical visualization
+* **Scikit-learn** — Preprocessing, feature selection, model training and evaluation
+* **Joblib** — Saving and loading trained model objects
+* **Streamlit** — Interactive web application
 
-## Project Structure
+## Repository Structure
 
 ```text
-heart-disease-preprocessing/
+Heart-Disease-Prediction-ML-App/
 │
+├── app.py
 ├── Heart_PreProcessing.ipynb
+├── Classification.ipynb
 ├── heart_raw.csv
-├── heart_clean.csv
-├── README.md
-└── requirements.txt
+├── heart_cleaned.csv
+├── logistic_heart.pkl
+├── scaler.pkl
+├── expected_columns.pkl
+├── requirements.txt
+└── README.md
+```
+
+## Project Files
+
+### `Heart_PreProcessing.ipynb`
+
+Contains the data inspection, cleaning, encoding, visualization, feature analysis, scaling and feature selection workflow.
+
+### `Classification.ipynb`
+
+Contains the machine learning experiments, comparison of scaled and unscaled models, evaluation metrics and final model selection.
+
+### `app.py`
+
+Streamlit application that loads the trained model and allows users to make predictions through an interactive interface.
+
+### `heart_raw.csv`
+
+Original dataset before preprocessing.
+
+### `heart_cleaned.csv`
+
+Processed dataset generated after preprocessing.
+
+### `logistic_heart.pkl`
+
+Saved trained Logistic Regression model used by the application.
+
+### `scaler.pkl`
+
+Saved feature scaler used to apply the same scaling procedure during prediction.
+
+### `expected_columns.pkl`
+
+Saved feature-column structure used to ensure user input matches the format expected by the trained model.
+
+## Installation
+
+Clone the repository:
+
+```bash
+git clone https://github.com/Rudz018/Heart-Disease-Prediction-ML-App.git
+cd Heart-Disease-Prediction-ML-App
+```
+
+Install the required dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+## Run the Application
+
+Start the Streamlit application using:
+
+```bash
+streamlit run app.py
+```
+
+The application will open in your browser.
+
+## Machine Learning Workflow
+
+The complete project follows this pipeline:
+
+```text
+Raw Heart Disease Dataset
+          ↓
+Data Inspection
+          ↓
+Data Cleaning
+          ↓
+Categorical Encoding
+          ↓
+Invalid Value Handling
+          ↓
+Exploratory Data Analysis
+          ↓
+Correlation & Variance Analysis
+          ↓
+ANOVA / Feature Selection
+          ↓
+Feature Scaling
+          ↓
+Multiple Classification Models
+          ↓
+Model Evaluation
+          ↓
+Model Comparison
+          ↓
+Scaled Logistic Regression
+          ↓
+Saved Model
+          ↓
+Streamlit Prediction Application
+```
+
+## Future Improvements
+
+Possible future improvements include:
+
+* Hyperparameter tuning
+* Cross-validation
+* Additional model comparison
+* Improved input validation
+* Model explainability
+* Probability-based prediction display
+* Deployment to a public cloud platform
+* Adding a prediction history feature
+* Improving UI and visualization
+
+## Disclaimer
+
+This project is created for educational and machine learning demonstration purposes.
+
+The predictions produced by the application should not be considered medical advice, diagnosis, or treatment recommendations.
+
+## Author
+
+**Rudra Wagh**
+
+GitHub: [Rudz018](https://github.com/Rudz018)
