@@ -45,7 +45,7 @@ cholesterol = st.number_input(
 
 fasting_bs = st.selectbox(
     "Fasting Blood Sugar >120 mg/dL",
-    ["1", "0"]
+    ["Yes", "No"]
 )
 
 resting_ecg = st.selectbox(
@@ -66,7 +66,7 @@ max_hr = st.slider(
 
 exercise_angina = st.selectbox(
     "Exercise Induced Angina",
-    ["Y", "N"]
+    ["Yes", "No"]
 )
 
 oldpeak = st.selectbox(
@@ -91,13 +91,13 @@ if st.button("Predict"):
         "Age": age,
         "RestingBP": resting_bp,
         "Cholesterol": cholesterol,
-        "FastingBS": fasting_bs,
+        "FastingBS": 1 if fasting_bs == "Yes" else 0,
         "OldPeak": oldpeak,
         "MaxHR": max_hr,
         "Sex_" + sex: 1,
         "ChestPain_" + chest_pain: 1,
         "RestingECG_" + resting_ecg: 1,
-        "ExerciseAngina_" + exercise_angina: 1,
+        "ExerciseAngina_" + ("Y" if exercise_angina == "Yes" else "N"): 1,
         "ST_Slope_" + st_slope: 1
     }
 
