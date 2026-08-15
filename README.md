@@ -2,6 +2,10 @@
 
 An end-to-end machine learning project that analyzes a heart disease dataset, performs data preprocessing and feature selection, compares multiple classification models, and deploys the selected model through an interactive Streamlit web application.
 
+## 🚀 Live Demo
+
+[Try the Heart Disease Prediction App](https://rw18-heart-disease-prediction-ml-app-nkwjurecjtwj2pr8ursmxa.streamlit.app/)
+
 ## Project Overview
 
 The goal of this project is to build a complete machine learning workflow for predicting the presence of heart disease from patient-related clinical attributes.
