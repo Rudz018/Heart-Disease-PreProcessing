@@ -1,5 +1,7 @@
-numpy
-pandas
-matplotlib
-scikit-learn
-google collab/jupyter notebook
+numpy         → numerical operations
+pandas        → data handling
+matplotlib    → plots
+seaborn       → statistical visualizations
+scikit-learn  → preprocessing, feature selection, ML models
+streamlit     → your web UI
+joblib        → saving/loading .pkl model, scaler, and columns
