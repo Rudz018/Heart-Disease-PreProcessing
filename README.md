@@ -156,19 +156,20 @@ The interface also provides sensible pre-filled example values so that users can
 ## Repository Structure
 
 ```text
-Heart-Disease-Prediction-ML-App/
+Heart-Disease-Prediction-ML-APP/
 │
-├── app.py
 ├── Heart_PreProcessing.ipynb
-├── Classification.ipynb
+├── ML_Classification.ipynb
+├── app.py
 ├── heart_raw.csv
 ├── heart_cleaned.csv
 ├── logistic_heart.pkl
 ├── scaler.pkl
-├── expected_columns.pkl
+├── columns.pkl
 ├── requirements.txt
 └── README.md
 ```
+
 
 ## Project Files
 
@@ -200,7 +201,7 @@ Saved trained Logistic Regression model used by the application.
 
 Saved feature scaler used to apply the same scaling procedure during prediction.
 
-### `expected_columns.pkl`
+### `columns.pkl`
 
 Saved feature-column structure used to ensure user input matches the format expected by the trained model.
 
